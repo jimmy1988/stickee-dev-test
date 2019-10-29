@@ -1,3 +1,7 @@
+<?php
+  include("php/frontend/components/top/cacheControl.php");
+?>
+
 <!DOCTYPE html>
 <html>
   <head>
