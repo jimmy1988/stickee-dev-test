@@ -202,5 +202,5 @@
       <!-- Navbar End-->
 
       <?php
-        include("php/includes/loginModal.php");
+        include("php/frontend/includes/loginModal.php");
       ?>
