@@ -6,11 +6,11 @@
   !defined("APP_NAME") ? define("APP_NAME", "Stickee Dev Test") : "";
 
   $addressArray = array(
-    'Address 1' => "",
-    'Address 2' => "",
-    'City' => "",
-    'Postcode' => "",
-    'Country' => ""
+    'Address 1' => "32 Asbury Court",
+    'Address 2' => "Great Barr",
+    'City' => "Birmingham",
+    'Postcode' => "B43 6QS",
+    'Country' => "United Kingdom"
   );
 
   !defined("CONTACT_INFO") ? define("CONTACT_INFO", $addressArray) : "";
@@ -18,6 +18,5 @@
   !defined("DB_HOST") ? define("DB_HOST", "localhost") : "";
   !defined("DB_USER") ? define("DB_USER", "stickeedevtestusr") : "";
   !defined("DB_PASS") ? define("DB_PASS", "pqilcqtXRFb59JsB") : "";
-
-  $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASS);
+  !defined("DB_NAME") ? define("DB_NAME", "stickee-dev-test") : "";
 ?>
