@@ -21,10 +21,10 @@
         $sql .= "* ";
       }
 
-      $sql .= "FROM " . $this->table . " ";
+      $sql .= " FROM " . $this->table . " ";
 
       if(isset($conditions) && !empty($conditions) && count($conditions) > 0){
-        $sql .= "WHERE ";
+        $sql .= " WHERE ";
 
         for($i=0; $i < count($conditions); $i++){
           $sql .= $conditions[$i] . " ";
@@ -32,7 +32,7 @@
       }
 
       if(isset($orderBy) && !empty($orderBy) && count($orderBy) > 0){
-        $sql .= "ORDER BY ";
+        $sql .= " ORDER BY ";
 
         $i = 0;
         foreach ($orderBy as $field => $order) {
@@ -53,9 +53,6 @@
       if(isset($offset) && $offset >= 0){
         $sql .= " OFFSET " . $offset;
       }
-
-      // print_r($sql);
-      // die();
 
       return $this->mysqli->query($sql);
 
