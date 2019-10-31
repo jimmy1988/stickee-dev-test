@@ -23,14 +23,18 @@
       $data = array();
       $newAmount = $amountRequired;
       while($row = $allProducts->fetch_assoc()){
-        // array_push($data, $row);
 
+        $thisBoxSize = array();
         $total = floor($newAmount / $row['product_box_qty']);
         if($total > 0){
-          $data[$row['product_box_qty']] = $total;
+          $thisBoxSize['box_qty'] = $row['product_box_qty'];
+          $thisBoxSize['amount'] = $total;
         }else{
-          $data[$row['product_box_qty']] = 0;
+          $thisBoxSize['box_qty'] = $row['product_box_qty'];
+          $thisBoxSize['amount'] = 0;
         }
+
+        array_push($data, $thisBoxSize);
 
         $remainder = $amountRequired % $row['product_box_qty'];
         if($remainder > 0){
@@ -40,10 +44,13 @@
         }
 
         if($minAmount == $row['product_box_qty'] && $newAmount > 0 && $newAmount < $minAmount){
-          $data[$minAmount] = $data[$minAmount] + 1;
+          for($i = 0; $i < count($data); $i++){
+            if($data[$i]['box_qty'] == $minAmount){
+              $data[$i]['amount'] =   $data[$i]['amount'] + 1;
+            }
+          }
           break;
         }
-
       }
 
       $response = getJSONResponse(true, array(), $data);
