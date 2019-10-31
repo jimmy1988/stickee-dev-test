@@ -58,7 +58,7 @@
       echo $response;
 
     }else{
-      echo getJSONResponse(true, array("No Data Found in the Database"), array());
+      echo getJSONResponse(true, array("No Data Found"), array());
     }
 
   }else{
