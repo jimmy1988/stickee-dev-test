@@ -60,12 +60,17 @@ function responseXHR(){
 
       $("#breakdown").html(html);
     }else{
-      console.log("no");
+      var html = "";
+      for(var i = 0; i < responseJSON.messages.length; i++){
+        html = html + "<div>" + responseJSON.messages[i] + "</div>";
+      }
+      $("#breakdown").html(html);
     }
   }
 }
 
 
 $(document).ready(function(){
-  $("#amount-required").on("keyup, change", requestXHR);
+  $("#amount-required").on("change", requestXHR);
+  $("#amount-required").on("keyup", requestXHR);
 });
