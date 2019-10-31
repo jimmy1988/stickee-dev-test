@@ -13,3 +13,7 @@
   display: block !important;
   margin: 0 auto;
 }
+
+#breakdown-container{
+  margin-top:15px;
+}
