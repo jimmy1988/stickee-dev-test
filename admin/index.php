@@ -8,7 +8,7 @@
   include("php/includes/sidebar.php");
 
   $allProducts = New Product;
-  $allProductsResult = $allProducts->getProducts(array(), array(), array("product_box_qty" => "ASC"));
+  $allProductsResult = $allProducts->getProducts(array(), array(), array("product_name" => "ASC","product_box_qty" => "ASC"));
 
 ?>
 
@@ -49,7 +49,7 @@
                           echo "<tr>";
                           echo "<td>";
                           echo "<div class=\"form-group\">";
-                          echo "<input type=\"hidden\" name=\"product_id\" value=\"" . $row['product_id'] . "\"/>";
+                          echo "<input type=\"hidden\" name=\"product_id[]\" value=\"" . $row['product_id'] . "\"/>";
                           echo "<input type=\"text\" name=\"product_name[]\" class=\"form-control\" value=\"" . $row['product_name'] . "\"/>";
                           echo "</div>";
                           echo "</td>";
