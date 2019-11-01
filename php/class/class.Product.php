@@ -7,6 +7,35 @@
       parent::__construct();
     }
 
+    public function deleteProduct($conditions = array(), $limit = null){
+      $sql = "DELETE FROM " . $this->table . " ";
+
+      if(isset($conditions) && !empty($conditions) && is_array($conditions) && count($conditions) > 0){
+        $sql .= "WHERE ";
+        $f = 0;
+        foreach($conditions as $field => $condition){
+
+          if($f > 0 && $f < count($conditions)){
+            $sql .= " AND ";
+          }
+
+          $sql .= $field . " IN (";
+          for($i=0; $i < count($condition); $i++){
+            if($i == 0){
+              $sql .= $condition[$i];
+            }else{
+              $sql .= ", " . $condition[$i];
+            }
+          }
+          $sql .= ") ";
+
+          $f++;
+        }
+
+        return $this->mysqli->query($sql);
+      }
+    }
+
     public function getProducts($fields = array(), $conditions = array(), $orderBy = array(), $limit = null, $offset=null){
       $sql = "SELECT ";
       if(isset($fields) && !empty($fields) && count($fields) > 0){
