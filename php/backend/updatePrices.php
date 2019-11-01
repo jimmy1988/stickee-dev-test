@@ -52,10 +52,25 @@
           break;
         }
       }
+  
+      for($i = count($data) - 1; $i > 0; $i--){
+        $fieldToRefactor = $data[$i]['box_qty'] * $data[$i]['amount'];
+        $amountToIncreaseTo = floor($fieldToRefactor / $data[$i-1]['box_qty']);
+        $amountToMinus= floor($fieldToRefactor / $data[$i]['box_qty']);
 
-      $response = getJSONResponse(true, array(), $data);
+        for($j = count($data) - 1; $j >= 0; $j--){
+          if($fieldToRefactor == $data[$j]['box_qty'] && $amountToIncreaseTo > 0 && $amountToMinus > 0){
+            $data[$j]['amount'] = $data[$j]['amount'] + $amountToIncreaseTo;
+            $data[$i]['amount'] = $data[$i]['amount'] - $amountToMinus;
+            break;
+          }
+        }
+      }
 
-      echo $response;
+    $response = getJSONResponse(true, array(), $data);
+
+    echo $response;
+
 
     }else{
       echo getJSONResponse(true, array("No Data Found"), array());
