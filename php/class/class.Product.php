@@ -7,6 +7,31 @@
       parent::__construct();
     }
 
+    public function createProduct($fieldsAndValues = array()){
+      if(isset($fieldsAndValues)&& !empty($fieldsAndValues) && is_array($fieldsAndValues) && count($fieldsAndValues) > 0){
+        $fields = "";
+        $values = "";
+
+        $i=0;
+        foreach($fieldsAndValues as $field => $value){
+          if($i == 0){
+            $fields .= $field;
+            $values .= "'" . $value . "'";
+          }else{
+            $fields .= ", " . $field;
+            $values .= ", '" . $value . "'";
+          }
+          $i++;
+        }
+
+        $sql = "INSERT INTO " . $this->table . " (" . $fields . ") VALUES (" . $values . ")";
+
+        return $this->mysqli->query($sql);
+      }else{
+        return false;
+      }
+    }
+
     public function deleteProduct($conditions = array(), $limit = null){
       $sql = "DELETE FROM " . $this->table . " ";
 
@@ -85,6 +110,45 @@
 
       return $this->mysqli->query($sql);
 
+    }
+
+    public function updateProduct($fieldsValuesToSet = array(), $conditions = array(), $limit = null){
+
+      if(isset($fieldsValuesToSet) && !empty($fieldsValuesToSet) && is_array($fieldsValuesToSet) && count($fieldsValuesToSet) > 0){
+        $sql = "UPDATE " . $this->table . " SET ";
+
+        $f = 0;
+        foreach($fieldsValuesToSet as $field => $value){
+
+          if($f == 0){
+            $sql .= $field . "='" . $value."'";
+          }else{
+            $sql .= "," . $field . "='" . $value."'";
+          }
+
+          $f++;
+        }
+
+        if(isset($conditions) && !empty($conditions) && is_array($conditions) && count($conditions) > 0){
+          $sql .= " WHERE ";
+          for($i=0;$i<count($conditions); $i++){
+            if($i == 0){
+              $sql .= $conditions[$i];
+            }else{
+              $sql .= " AND " . $conditions[$i];
+            }
+          }
+        }
+
+        if(isset($limit) && !empty($limit) && $limit > 0){
+          $sql .= " LIMIT " . $limit;
+        }
+
+        return $this->mysqli->query($sql);
+
+      }else{
+        return false;
+      }
     }
   }
 
