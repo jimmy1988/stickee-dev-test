@@ -1,6 +1,5 @@
 <section class="content-header">
   <h1>
-    Fixed Layout
-    <small>Blank example to the fixed layout</small>
+    <?php echo isset($pageTitle) && !empty($pageTitle) ? $pageTitle : ""; ?>
   </h1>
 </section>
